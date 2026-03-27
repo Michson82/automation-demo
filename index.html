@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Your Appointment</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: #1a1a1a;
+      color: #f0f0f0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #fff;
+    }
+
+    .header .accent {
+      color: #c9a44a;
+    }
+
+    .header p {
+      margin-top: 0.5rem;
+      color: #888;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+    }
+
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: #c9a44a;
+      margin: 1rem auto 0;
+    }
+
+    form {
+      background: #242424;
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 2rem;
+    }
+
+    .field {
+      margin-bottom: 1.25rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #999;
+      margin-bottom: 0.4rem;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: #1a1a1a;
+      border: 1px solid #3a3a3a;
+      border-radius: 8px;
+      color: #f0f0f0;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: #c9a44a;
+    }
+
+    select option {
+      background: #1a1a1a;
+      color: #f0f0f0;
+    }
+
+    .row {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .row .field {
+      flex: 1;
+    }
+
+    button {
+      width: 100%;
+      padding: 0.9rem;
+      margin-top: 0.5rem;
+      background: #c9a44a;
+      color: #1a1a1a;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    button:hover {
+      background: #dbb85c;
+    }
+
+    button:disabled {
+      background: #666;
+      cursor: not-allowed;
+    }
+
+    .confirmation {
+      display: none;
+      text-align: center;
+      padding: 3rem 2rem;
+      background: #242424;
+      border: 1px solid #333;
+      border-radius: 12px;
+    }
+
+    .confirmation .checkmark {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: #c9a44a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-size: 2rem;
+      color: #1a1a1a;
+    }
+
+    .confirmation h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .confirmation p {
+      color: #888;
+      line-height: 1.6;
+    }
+
+    .confirmation .booked-name {
+      color: #c9a44a;
+      font-weight: 600;
+    }
+
+    .error-msg {
+      display: none;
+      background: #3a1c1c;
+      border: 1px solid #5a2a2a;
+      color: #f0a0a0;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Sharp <span class="accent">Cuts</span></h1>
+      <p>Book Your Appointment</p>
+      <div class="divider"></div>
+    </div>
+
+    <form id="booking-form">
+      <div class="field">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" required placeholder="John Smith">
+      </div>
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required placeholder="john@example.com">
+      </div>
+
+      <div class="field">
+        <label for="phone">Phone</label>
+        <input type="tel" id="phone" name="phone" required placeholder="(555) 123-4567">
+      </div>
+
+      <div class="field">
+        <label for="service">Service</label>
+        <select id="service" name="service" required>
+          <option value="" disabled selected>Select a service</option>
+          <option value="Haircut">Haircut - $30</option>
+          <option value="Fade">Fade - $35</option>
+          <option value="Shape Up">Shape Up - $20</option>
+        </select>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="date">Date</label>
+          <input type="date" id="date" name="date" required>
+        </div>
+        <div class="field">
+          <label for="time">Time</label>
+          <input type="time" id="time" name="time" required>
+        </div>
+      </div>
+
+      <button type="submit" id="submit-btn">Book Appointment</button>
+      <div class="error-msg" id="error-msg">Something went wrong. Please try again.</div>
+    </form>
+
+    <div class="confirmation" id="confirmation">
+      <div class="checkmark">&#10003;</div>
+      <h2>You're Booked!</h2>
+      <p>Thanks <span class="booked-name" id="booked-name"></span>, your appointment has been confirmed. We'll send a reminder to your email.</p>
+    </div>
+  </div>
+
+  <script>
+    // Set min date to today
+    document.getElementById('date').min = new Date().toISOString().split('T')[0];
+
+    // REPLACE THIS with your actual Zapier webhook URL
+    const WEBHOOK_URL = 'https://hooks.zapier.com/hooks/catch/XXXXXXX/XXXXXXX/';
+
+    document.getElementById('booking-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const btn = document.getElementById('submit-btn');
+      const errorMsg = document.getElementById('error-msg');
+      errorMsg.style.display = 'none';
+      btn.disabled = true;
+      btn.textContent = 'Booking...';
+
+      const data = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        service: document.getElementById('service').value,
+        date: document.getElementById('date').value,
+        time: document.getElementById('time').value,
+      };
+
+      try {
+        await fetch(WEBHOOK_URL, {
+          method: 'POST',
+          body: JSON.stringify(data),
+          headers: { 'Content-Type': 'application/json' },
+          mode: 'no-cors',
+        });
+
+        // Show confirmation
+        document.getElementById('booked-name').textContent = data.name.split(' ')[0];
+        document.getElementById('booking-form').style.display = 'none';
+        document.getElementById('confirmation').style.display = 'block';
+      } catch (err) {
+        errorMsg.style.display = 'block';
+        btn.disabled = false;
+        btn.textContent = 'Book Appointment';
+      }
+    });
+  </script>
+</body>
+</html>
